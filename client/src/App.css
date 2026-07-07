@@ -14,8 +14,8 @@
 }
 
 .landing-content h1 {
-  font-size: 56px;
-  margin-bottom: 16px;
+  font-size: 70px;
+  padding: 24px;
 }
 
 .landing-content p {
@@ -25,14 +25,15 @@
   margin-top: 50px;
 }
 
-.landing-actions {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-}
-
 .landing-features {
-    gap: 12px;
+  gap: 50px;
+  display: flex;
+  flex-direction: row;
+}
+.landing-auth {
+  margin-top: 64px;
+  display: flex;
+  gap: 20px;
 }
 
 button {

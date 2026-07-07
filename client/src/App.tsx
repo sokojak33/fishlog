@@ -6,11 +6,7 @@ function App() {
       <section className="landing-content">
         <h1>FishLog</h1>
 
-        <p>
-          Welcome to FishLog, the place where you can track your fishing adventures! 
-          Here you can log your trips, record your catches, and share your experiences 
-          with the fishing community. To start, log in or create an account.
-        </p>
+        <p>Track your catches, fishing notes, and favorite locations in one place.</p>
 
       </section>
       <section className="landing-features">
@@ -29,11 +25,8 @@ function App() {
           <p>Keep a growing record of your fishing trips over time.</p>
         </article>
       </section>
-      <section className="landing-actions">
 
-      </section>
-
-      <div className="auth">
+      <div className="landing-auth">
         <button>Create Account</button>
         <button>Log In</button>
       </div>
