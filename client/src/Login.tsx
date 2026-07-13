@@ -2,8 +2,8 @@ import Card from 'react-bootstrap/Card'
 import './Login.css'
 import { useState } from 'react'
 
-const MIN_USERNAME_LENGTH= 7;
-const MIN_PASSWORD_LENGTH = 7;
+const MIN_USERNAME_LENGTH= 5;
+const MIN_PASSWORD_LENGTH = 8;
 
 function Login() {
 
@@ -11,7 +11,8 @@ function Login() {
     const [password, setPassword] = useState("");
 
 
-    function handleLogin(){
+    function handleLogin(e){
+        e.preventDefault();
 
         const user = username.trim();
         const pass = password;
@@ -47,7 +48,7 @@ function Login() {
                           onChange={(e) => setPassword(e.target.value)}
                         />
                         <button 
-                            disabled={!(username && password)}
+                            disabled={!(username.trim()  && password)}
                             type="submit">
                             Login
                         </button>
