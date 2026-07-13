@@ -1,0 +1,23 @@
+main {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* TODO: replace hard-coded bottom padding with better internal spacing/gap. */
+.login-card {
+  background-color: black; 
+  padding: 50px;
+  padding-bottom: 120px;
+} 
+
+.user-input {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+.title {
+    font-size: 2rem;
+}
