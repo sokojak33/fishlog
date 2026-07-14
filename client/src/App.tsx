@@ -1,6 +1,10 @@
 import './App.css'
+import { useNavigate } from "react-router-dom";
 
 function App() {
+
+  const navigate = useNavigate();
+
   return (
     <main className="landing-page">
       <section className="landing-content">
@@ -27,8 +31,8 @@ function App() {
       </section>
 
       <div className="landing-auth">
-        <button>Create Account</button>
-        <button>Log In</button>
+        <button onClick={() => navigate("/signup")}>Create Account</button>
+        <button onClick={() => navigate("/login")}>Log In</button>
       </div>
     </main>
   );

@@ -1,6 +1,7 @@
 import Card from 'react-bootstrap/Card'
 //import './Signup.css'
 import { useState } from 'react'
+import { Link } from 'react-router'
 
 const MIN_USERNAME_LENGTH= 5;
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -76,7 +77,7 @@ function Signup() {
                         </button>
                     </form>
 
-                    <p>Already have an account? <a href="https://google.com">Log in</a></p>
+                    <p>Already have an account? <Link to="/login">Log in</Link></p>
                 </Card.Body>
             </Card>
         </main>

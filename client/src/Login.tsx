@@ -1,6 +1,7 @@
 import Card from 'react-bootstrap/Card'
 import './Login.css'
 import { useState } from 'react'
+import { Link } from 'react-router'
 
 const MIN_USERNAME_LENGTH= 5;
 const MIN_PASSWORD_LENGTH = 8;
@@ -54,7 +55,7 @@ function Login() {
                         </button>
                     </form>
 
-                    <p>Don't have an account? <a href="https://google.com">Create one</a></p>
+                    <p>Don't have an account? <Link to="/signup">Create one</Link></p>
                 </Card.Body>
             </Card>
         </main>
