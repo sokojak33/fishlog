@@ -1,5 +1,5 @@
 import Card from 'react-bootstrap/Card'
-//import './Signup.css'
+import './Signup.css'
 import { useState } from 'react'
 import { Link } from 'react-router'
 
