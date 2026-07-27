@@ -1,5 +1,5 @@
 import Card from 'react-bootstrap/Card'
-//import './Signup.css'
+import './Auth.css'
 import { useState } from 'react'
 import { Link } from 'react-router'
 
@@ -39,38 +39,38 @@ function Signup() {
 
     return (
         <main>
-            <Card className="signup-card">
+            <Card className="card">
                 <Card.Title className="title">Sign Up</Card.Title>
                 <Card.Body>
                     <form className="user-input" onSubmit={handleSignup}>
                         <label htmlFor="username">Username</label>
-                        <input
+                        <input className="form-control"
                           id = "username"
                           value={username}
                           onChange={(e) => setUsername(e.target.value)}
                         />        
                         <label htmlFor="email">Email</label>
-                        <input
+                        <input className="form-control"
                           id = "email"
                           type="email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                         />  
                         <label htmlFor="password">Password:</label>
-                        <input  
+                        <input className="form-control"
                           id="password"
                           type="password"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                         />
                         <label htmlFor="confirmPassword">Confirm Password:</label>
-                        <input  
+                        <input className="form-control"
                           id="confirmPassword"
                           type="password"
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
                         />
-                        <button 
+                        <button className="btn btn-primary"
                             disabled={!(username.trim() && email.trim()  && password  && confirmPassword)}
                             type="submit">
                             Sign Up

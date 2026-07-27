@@ -1,0 +1,16 @@
+.app-navbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.app-navbar .navbar-brand {
+  color: var(--text);
+}
+
+.app-navbar .nav-link {
+  color: var(--text-muted);
+}
+
+.app-navbar .nav-link:hover {
+  color: var(--primary);
+}
