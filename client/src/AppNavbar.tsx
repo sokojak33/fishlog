@@ -1,3 +1,4 @@
+import './AppNavbar.css'
 import { Navbar, Nav} from 'react-bootstrap'
 import { Container } from 'react-bootstrap'
 import { Link } from "react-router";
@@ -5,7 +6,7 @@ import { Link } from "react-router";
 function AppNavbar() {
     return (
         <div>
-            <Navbar>
+            <Navbar className="app-navbar">
                 <Container>
                     <Navbar.Brand as={Link} to="/">Fishlog</Navbar.Brand>
                     <Nav>

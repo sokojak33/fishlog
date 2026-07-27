@@ -1,0 +1,52 @@
+main {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  padding: 50px;
+  padding-bottom: 120px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.card .form-control {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.card .form-control::placeholder {
+  color: var(--text-muted);
+}
+
+.card .form-control:focus {
+  background: var(--bg);
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.card .btn {
+  background: var(--primary);
+  color: var(--text);
+  border: 1px solid var(--primary);
+}
+
+.card .btn:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+.user-input {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+.title {
+    font-size: 2rem;
+}

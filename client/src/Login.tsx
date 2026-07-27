@@ -1,5 +1,5 @@
 import Card from 'react-bootstrap/Card'
-import './Login.css'
+import './Auth.css'
 import { useState } from 'react'
 import { Link } from 'react-router'
 
@@ -31,24 +31,24 @@ function Login() {
 
     return (
         <main>
-            <Card className="login-card">
+            <Card className="card">
                 <Card.Title className="title">Log In</Card.Title>
                 <Card.Body>
                     <form className="user-input" onSubmit={handleLogin}>
                         <label htmlFor="username">Username</label>
-                        <input
+                        <input className="form-control"
                           id = "username"
                           value={username}
                           onChange={(e) => setUsername(e.target.value)}
                         />                    
                         <label htmlFor="password">Password:</label>
-                        <input  
+                        <input className="form-control"
                           id="password"
                           type="password"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                         />
-                        <button 
+                        <button className="btn btn-primary"
                             disabled={!(username.trim()  && password)}
                             type="submit">
                             Login

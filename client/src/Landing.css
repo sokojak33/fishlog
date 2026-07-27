@@ -1,11 +1,10 @@
 .landing-page {
-  min-height: 100vh;
+  min-height: calc(100vh - 56px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 24px;
-  font-family: Arial, sans-serif;
 }
 
 .landing-content {
@@ -16,30 +15,37 @@
 .landing-content h1 {
   font-size: 70px;
   padding: 24px;
+  color: var(--text);
 }
 
 .landing-content p {
   font-size: 20px;
   line-height: 1.5;
-  margin-bottom: 32px;
-  margin-top: 50px;
+  margin: 50px 0 32px;
+  color: var(--text-muted);
 }
 
 .landing-features {
-  gap: 50px;
   display: flex;
   flex-direction: row;
+  gap: 50px;
 }
+
 .landing-auth {
   margin-top: 64px;
   display: flex;
   gap: 20px;
 }
 
-button {
+.landing-auth button {
   padding: 12px 18px;
-  border: none;
+  border: 1px solid var(--border);
   border-radius: 8px;
+  background: var(--primary);
+  color: var(--text);
   cursor: pointer;
-  margin: 5px;
+}
+
+.landing-auth button:hover {
+  background: var(--primary-hover);
 }
