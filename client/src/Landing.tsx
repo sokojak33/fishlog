@@ -1,5 +1,6 @@
 import './Landing.css'
 import { useNavigate } from "react-router";
+import Button from 'react-bootstrap/Button'
 
 function Landing() {
 
@@ -31,8 +32,8 @@ function Landing() {
       </section>
 
       <div className="landing-auth">
-        <button onClick={() => navigate("/signup")}>Create Account</button>
-        <button onClick={() => navigate("/login")}>Log In</button>
+        <Button onClick={() => navigate("/signup")}>Create Account</Button>
+        <Button onClick={() => navigate("/login")}>Log In</Button>
       </div>
     </main>
   );
