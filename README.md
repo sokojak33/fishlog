@@ -13,3 +13,4 @@ In development.
 - Frontend validation
 - Routing between pages
 - Dashboard with placeholder data
+- SpringBoot backend with testing
