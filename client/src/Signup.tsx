@@ -3,6 +3,8 @@ import "./Auth.css";
 import { useState } from "react";
 import { Link } from "react-router";
 
+import type { SubmitEvent } from "react";
+
 const MIN_USERNAME_LENGTH = 5;
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const MIN_PASSWORD_LENGTH = 8;
@@ -13,7 +15,7 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  function handleSignup(e) {
+  function handleSignup(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const user = username.trim();

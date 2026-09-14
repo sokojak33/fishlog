@@ -2,6 +2,7 @@ import Card from "react-bootstrap/Card";
 import "./Auth.css";
 import { useState } from "react";
 import { Link } from "react-router";
+import type { SubmitEvent } from "react";
 
 const MIN_USERNAME_LENGTH = 5;
 const MIN_PASSWORD_LENGTH = 8;
@@ -10,7 +11,7 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleLogin(e) {
+  function handleLogin(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const user = username.trim();
