@@ -1,9 +1,8 @@
-import './Landing.css'
+import "./Landing.css";
 import { useNavigate } from "react-router";
-import Button from 'react-bootstrap/Button'
+import Button from "react-bootstrap/Button";
 
 function Landing() {
-
   const navigate = useNavigate();
 
   return (
@@ -11,8 +10,10 @@ function Landing() {
       <section className="landing-content">
         <h1>FishLog</h1>
 
-        <p>Track your catches, fishing notes, and favorite locations in one place.</p>
-
+        <p>
+          Track your catches, fishing notes, and favorite locations in one
+          place.
+        </p>
       </section>
       <section className="landing-features">
         <article>
