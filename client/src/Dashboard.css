@@ -1,0 +1,13 @@
+.dash-page {
+  min-height: calc(100vh - 56px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.dash-cards {
+    display: flex;
+    flex-direction: row;
+}

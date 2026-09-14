@@ -33,3 +33,14 @@ body {
 #root {
   min-height: 100vh;
 }
+
+.btn-primary {
+  --bs-btn-bg: var(--primary);
+  --bs-btn-border-color: var(--primary);
+
+  --bs-btn-hover-bg: var(--primary-hover);
+  --bs-btn-hover-border-color: var(--primary-hover);
+
+  --bs-btn-color: var(--text);
+  --bs-btn-hover-color: var(--text);
+}

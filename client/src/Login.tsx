@@ -1,65 +1,69 @@
-import Card from 'react-bootstrap/Card'
-import './Auth.css'
-import { useState } from 'react'
-import { Link } from 'react-router'
+import Card from "react-bootstrap/Card";
+import "./Auth.css";
+import { useState } from "react";
+import { Link } from "react-router";
+import type { SubmitEvent } from "react";
 
-const MIN_USERNAME_LENGTH= 5;
+const MIN_USERNAME_LENGTH = 5;
 const MIN_PASSWORD_LENGTH = 8;
 
 function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+  function handleLogin(e: SubmitEvent<HTMLFormElement>) {
+    e.preventDefault();
 
+    const user = username.trim();
+    const pass = password;
 
-    function handleLogin(e){
-        e.preventDefault();
-
-        const user = username.trim();
-        const pass = password;
-
-        if (user.length < MIN_USERNAME_LENGTH){
-            alert(`Username must be at least ${MIN_USERNAME_LENGTH} characters!`);
-        } else  if (pass.length < MIN_PASSWORD_LENGTH) {
-            alert(`Password must be at least ${MIN_PASSWORD_LENGTH} characters!`);
-        } else {
-            // do backend validation here
-            alert(`Logged in as ${user}!`);
-        }
-
+    if (user.length < MIN_USERNAME_LENGTH) {
+      alert(`Username must be at least ${MIN_USERNAME_LENGTH} characters!`);
+    } else if (pass.length < MIN_PASSWORD_LENGTH) {
+      alert(`Password must be at least ${MIN_PASSWORD_LENGTH} characters!`);
+    } else {
+      // do backend validation here
+      alert(`Logged in as ${user}!`);
     }
+  }
 
-    return (
-        <main>
-            <Card className="card">
-                <Card.Title className="title">Log In</Card.Title>
-                <Card.Body>
-                    <form className="user-input" onSubmit={handleLogin}>
-                        <label htmlFor="username">Username</label>
-                        <input className="form-control"
-                          id = "username"
-                          value={username}
-                          onChange={(e) => setUsername(e.target.value)}
-                        />                    
-                        <label htmlFor="password">Password:</label>
-                        <input className="form-control"
-                          id="password"
-                          type="password"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                        />
-                        <button className="btn btn-primary"
-                            disabled={!(username.trim()  && password)}
-                            type="submit">
-                            Login
-                        </button>
-                    </form>
+  return (
+    <main>
+      <Card className="card">
+        <Card.Title className="title">Log In</Card.Title>
+        <Card.Body>
+          <form className="user-input" onSubmit={handleLogin}>
+            <label htmlFor="username">Username</label>
+            <input
+              className="form-control"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <label htmlFor="password">Password:</label>
+            <input
+              className="form-control"
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button
+              className="btn btn-primary"
+              disabled={!(username.trim() && password)}
+              type="submit"
+            >
+              Login
+            </button>
+          </form>
 
-                    <p>Don't have an account? <Link to="/signup">Create one</Link></p>
-                </Card.Body>
-            </Card>
-        </main>
-    );
+          <p>
+            Don't have an account? <Link to="/signup">Create one</Link>
+          </p>
+        </Card.Body>
+      </Card>
+    </main>
+  );
 }
 
 export default Login;
