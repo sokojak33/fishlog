@@ -2,19 +2,14 @@ import "./Dashboard.css";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
-
-type FishCatch = {
-  id: number;
-  species: string;
-  location: string;
-  date: string;
-  length: number;
-};
+import AddFishModal from "./components/AddCatchModal";
+import type { FishCatch } from "./types/fishCatch";
 
 function Dashboard() {
   const [catches, setCatches] = useState<FishCatch[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showCatchForm, setShowCatchForm] = useState(false);
 
   useEffect(() => {
     fetch("/api/catches")
@@ -48,6 +43,10 @@ function Dashboard() {
     return catches.map((fish) => <li key={fish.id}>{fish.species}</li>);
   };
 
+  const addCatch = () => {
+    console.log("add catch here");
+  };
+
   const renderCatchStats = () => {
     if (loading) {
       return <li>Loading stats...</li>;
@@ -64,12 +63,21 @@ function Dashboard() {
     ));
   };
 
+  const closeCatchForm = () => {
+    setShowCatchForm(false);
+  };
+
   return (
     <div className="dash-page">
       <h1>Welcome back, you</h1>
-      <Button onClick={() => console.log("Open log catch form")}>
-        Log Catch
-      </Button>
+      <Button onClick={() => setShowCatchForm(true)}>Log Catch</Button>
+
+      <AddFishModal
+        show={showCatchForm}
+        onClose={closeCatchForm}
+        onAddCatch={addCatch}
+      />
+
       <section className="dash-cards">
         <Card>
           <h2>Recent catches</h2>
