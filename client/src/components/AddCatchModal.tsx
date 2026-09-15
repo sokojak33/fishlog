@@ -9,39 +9,55 @@ type AddCatchModalProps = {
   onAddCatch: (newCatch: NewFishCatch) => void;
 };
 
+type FormErrors = {
+  species?: string;
+  location?: string;
+  date?: string;
+  length?: string;
+};
+
 function AddCatchModal({ show, onClose, onAddCatch }: AddCatchModalProps) {
   const [species, setSpecies] = useState("");
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
   const [lengthInches, setLengthInches] = useState("");
+  const [errors, setErrors] = useState<FormErrors>({});
 
   function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
 
+    const newErrors: FormErrors = {};
+
     // species isnt null
     const speciesTrimmed = species.trim();
     if (speciesTrimmed === "") {
-      console.log("error for species");
-      return;
+      newErrors.species = "Species is required.";
     }
     // location isnt null
     const locationTrimmed = location.trim();
     if (locationTrimmed === "") {
-      console.log("error for loc");
-      return;
+      newErrors.location = "Location is required.";
     }
     // date inst null
     const dateTrimmed = date.trim();
     if (dateTrimmed === "") {
-      console.log("error for date");
-      return;
+      newErrors.date = "Date is required.";
     }
     // length isnt null and above 0
     const lengthNumber = +lengthInches;
-    if (lengthNumber < 0 && lengthInches !== "") {
-      console.log("error for length");
+    if (
+      lengthInches === "" ||
+      !Number.isFinite(lengthNumber) ||
+      lengthNumber <= 0
+    ) {
+      newErrors.length = "Length must be greater than 0.";
+    }
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) {
       return;
     }
+
     const newCatch: NewFishCatch = {
       species: speciesTrimmed,
       location: locationTrimmed,
@@ -51,9 +67,18 @@ function AddCatchModal({ show, onClose, onAddCatch }: AddCatchModalProps) {
     onAddCatch(newCatch);
   }
 
+  function handleClose() {
+    setSpecies("");
+    setLocation("");
+    setDate("");
+    setLengthInches("");
+    setErrors({});
+    onClose();
+  }
+
   return (
     <div>
-      <Modal show={show} onHide={onClose}>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header>
           <Modal.Title>Log catch</Modal.Title>
         </Modal.Header>
@@ -65,8 +90,12 @@ function AddCatchModal({ show, onClose, onAddCatch }: AddCatchModalProps) {
               <Form.Control
                 type="text"
                 value={species}
+                isInvalid={!!errors.species}
                 onChange={(e) => setSpecies(e.target.value)}
               ></Form.Control>
+              <Form.Control.Feedback type="invalid">
+                {errors.species}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group>
@@ -74,8 +103,12 @@ function AddCatchModal({ show, onClose, onAddCatch }: AddCatchModalProps) {
               <Form.Control
                 type="text"
                 value={location}
+                isInvalid={!!errors.location}
                 onChange={(e) => setLocation(e.target.value)}
               ></Form.Control>
+              <Form.Control.Feedback type="invalid">
+                {errors.location}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group>
@@ -83,8 +116,12 @@ function AddCatchModal({ show, onClose, onAddCatch }: AddCatchModalProps) {
               <Form.Control
                 type="date"
                 value={date}
+                isInvalid={!!errors.date}
                 onChange={(e) => setDate(e.target.value)}
               ></Form.Control>
+              <Form.Control.Feedback type="invalid">
+                {errors.date}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group>
@@ -94,11 +131,15 @@ function AddCatchModal({ show, onClose, onAddCatch }: AddCatchModalProps) {
                 min="0"
                 step="0.1"
                 value={lengthInches}
+                isInvalid={!!errors.length}
                 onChange={(e) => setLengthInches(e.target.value)}
               ></Form.Control>
+              <Form.Control.Feedback type="invalid">
+                {errors.length}
+              </Form.Control.Feedback>
             </Form.Group>
 
-            <Button>Submit</Button>
+            <Button type="submit">Submit</Button>
           </Form>
         </Modal.Body>
       </Modal>
