@@ -2,6 +2,8 @@ package com.fishlog.service;
 
 import com.fishlog.model.FishCatch;
 import com.fishlog.repository.CatchRepository;
+import com.fishlog.request.CreateCatchRequest;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,5 +19,9 @@ public class CatchService {
 
     public List<FishCatch> getAllCatches() {
         return catchRepository.findAll();
+    }
+
+    public FishCatch addCatch(CreateCatchRequest request) {
+        return catchRepository.createCatch(request);
     }
 }
