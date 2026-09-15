@@ -1,4 +1,4 @@
-import { Form, Modal, Button } from "react-bootstrap";
+import { Alert, Form, Modal, Button } from "react-bootstrap";
 import { useState } from "react";
 import type { NewFishCatch } from "../types/fishCatch";
 import type { SubmitEvent } from "react";
@@ -6,7 +6,8 @@ import type { SubmitEvent } from "react";
 type AddCatchModalProps = {
   show: boolean;
   onClose: () => void;
-  onAddCatch: (newCatch: NewFishCatch) => void;
+  onAddCatch: (newCatch: NewFishCatch) => Promise<boolean>;
+  addError: string | null;
 };
 
 type FormErrors = {
@@ -16,14 +17,19 @@ type FormErrors = {
   length?: string;
 };
 
-function AddCatchModal({ show, onClose, onAddCatch }: AddCatchModalProps) {
+function AddCatchModal({
+  show,
+  onClose,
+  onAddCatch,
+  addError,
+}: AddCatchModalProps) {
   const [species, setSpecies] = useState("");
   const [location, setLocation] = useState("");
   const [date, setDate] = useState("");
   const [lengthInches, setLengthInches] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
 
-  function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
+  async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const newErrors: FormErrors = {};
@@ -64,7 +70,12 @@ function AddCatchModal({ show, onClose, onAddCatch }: AddCatchModalProps) {
       date: dateTrimmed,
       length: lengthNumber,
     };
-    onAddCatch(newCatch);
+
+    const success = await onAddCatch(newCatch);
+
+    if (success) {
+      handleClose();
+    }
   }
 
   function handleClose() {
@@ -139,6 +150,7 @@ function AddCatchModal({ show, onClose, onAddCatch }: AddCatchModalProps) {
               </Form.Control.Feedback>
             </Form.Group>
 
+            {addError && <Alert variant="danger">{addError}</Alert>}
             <Button type="submit">Submit</Button>
           </Form>
         </Modal.Body>
