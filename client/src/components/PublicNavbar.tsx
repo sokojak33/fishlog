@@ -1,9 +1,9 @@
-import "./AppNavbar.css";
+import "./Navbar.css";
 import { Navbar, Nav } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router";
 
-function AppNavbar() {
+function PublicNavbar() {
   return (
     <div>
       <Navbar className="app-navbar">
@@ -12,11 +12,11 @@ function AppNavbar() {
             Fishlog
           </Navbar.Brand>
           <Nav>
-            <Nav.Link as={Link} to="/dashboard">
-              Dashboard
+            <Nav.Link as={Link} to="/login">
+              Log In
             </Nav.Link>
-            <Nav.Link as={Link} to="/account">
-              Account
+            <Nav.Link as={Link} to="/signup">
+              Sign Up
             </Nav.Link>
           </Nav>
         </Container>
@@ -25,4 +25,4 @@ function AppNavbar() {
   );
 }
 
-export default AppNavbar;
+export default PublicNavbar;
