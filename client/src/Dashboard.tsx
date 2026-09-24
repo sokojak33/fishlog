@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
 import AddCatchModal from "./components/AddCatchModal";
 import type { FishCatch, NewFishCatch } from "./types/fishCatch";
+import { useNavigate } from "react-router";
 
 function Dashboard() {
   const [catches, setCatches] = useState<FishCatch[]>([]);
@@ -11,6 +12,8 @@ function Dashboard() {
   const [showCatchForm, setShowCatchForm] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [addError, setAddError] = useState<string | null>(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("/api/catches")
@@ -94,14 +97,18 @@ function Dashboard() {
   return (
     <div className="dash-page">
       <h1>Welcome back, you</h1>
-      <Button
-        onClick={() => {
-          setAddError(null);
-          setShowCatchForm(true);
-        }}
-      >
-        Log Catch
-      </Button>
+      <div>
+        <Button
+          onClick={() => {
+            setAddError(null);
+            setShowCatchForm(true);
+          }}
+        >
+          Log Catch
+        </Button>
+        <Button onClick={() => navigate("/catches")}>View Catches</Button>
+      </div>
+
       <AddCatchModal
         show={showCatchForm}
         onClose={closeCatchForm}
