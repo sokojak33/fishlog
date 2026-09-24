@@ -7,6 +7,7 @@ import Landing from "./Landing";
 import Login from "./Login";
 import Signup from "./Signup";
 import Dashboard from "./Dashboard";
+import CatchHistory from "./CatchHistory";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
 
       <Route element={<AppLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/catches" element={<CatchHistory />} />
       </Route>
     </Routes>
   );

@@ -15,6 +15,9 @@ function SignedInNavbar() {
             <Nav.Link as={Link} to="/dashboard">
               Dashboard
             </Nav.Link>
+            <Nav.Link as={Link} to="/catches">
+              Catch History
+            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
