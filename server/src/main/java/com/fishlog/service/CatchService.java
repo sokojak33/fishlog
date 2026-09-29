@@ -22,6 +22,11 @@ public class CatchService {
     }
 
     public FishCatch addCatch(CreateCatchRequest request) {
-        return catchRepository.createCatch(request);
+        FishCatch newCatch = new FishCatch(
+                request.species(),
+                request.location(),
+                request.date(),
+                request.length());
+        return catchRepository.save(newCatch);
     }
 }
