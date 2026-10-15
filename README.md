@@ -2,7 +2,7 @@
 
 FishLog is a full-stack web application for tracking freshwater fishing catches. The project is being developed as a practical full-stack application using a React and TypeScript frontend with a Java Spring Boot backend.
 
-The goal of the project is to build a complete fishing log where users can record catches, review previous catches, and eventually manage their fishing history through persistent user accounts.
+The goal of the project is to build a complete fishing log where users can record catches, review and manage their fishing history, and eventually use persistent user accounts to manage their own catches.
 
 ## Current Features
 
@@ -10,7 +10,7 @@ The goal of the project is to build a complete fishing log where users can recor
 - Login and signup interfaces with frontend validation
 - Dashboard displaying catch data from the backend
 - Add Catch form with field validation
-- Create and retrieve catches through a REST API
+- REST API for creating, retrieving, updating, and deleting catches
 - Loading and error handling for API requests
 - Client/server integration using a Vite development proxy
 - Separate public and application navigation layouts
@@ -39,4 +39,4 @@ The goal of the project is to build a complete fishing log where users can recor
 
 ## Status
 
-FishLog is actively under development. Catch data is currently persisted using an H2 database through Spring Data JPA. Planned work includes expanded catch management such as viewing individual catches, editing and deleting catches, user authentication and account ownership, additional frontend and backend testing, and deployment.
+FishLog is actively under development. Catch data is persisted using an H2 database through Spring Data JPA, and the backend currently supports creating, retrieving, updating, and deleting catches.
