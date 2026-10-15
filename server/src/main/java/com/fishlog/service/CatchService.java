@@ -7,6 +7,7 @@ import com.fishlog.request.CreateCatchRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CatchService {
@@ -28,5 +29,20 @@ public class CatchService {
                 request.date(),
                 request.length());
         return catchRepository.save(newCatch);
+    }
+
+    public Optional<FishCatch> updateCatch(Long id, CreateCatchRequest request) {
+        Optional<FishCatch> foundCatch = catchRepository.findById(id);
+
+        if (foundCatch.isEmpty()) {
+            return foundCatch;
+        }
+
+        FishCatch existingCatch = foundCatch.get();
+        existingCatch.update(request.species(), request.location(), request.date(), request.length());
+
+        FishCatch updatedCatch = catchRepository.save(existingCatch);
+
+        return Optional.of(updatedCatch);
     }
 }
