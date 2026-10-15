@@ -22,6 +22,10 @@ public class CatchService {
         return catchRepository.findAll();
     }
 
+    public Optional<FishCatch> getCatch(Long id) {
+        return catchRepository.findById(id);
+    }
+
     public FishCatch addCatch(CreateCatchRequest request) {
         FishCatch newCatch = new FishCatch(
                 request.species(),

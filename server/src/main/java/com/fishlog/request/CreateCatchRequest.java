@@ -1,8 +1,11 @@
 package com.fishlog.request;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+
 public record CreateCatchRequest(
-        String species,
-        String location,
-        String date,
-        double length) {
+                @NotBlank String species,
+                @NotBlank String location,
+                @NotBlank String date,
+                @Positive double length) {
 }

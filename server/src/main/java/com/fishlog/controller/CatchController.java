@@ -4,7 +4,8 @@ import com.fishlog.model.FishCatch;
 import com.fishlog.request.CreateCatchRequest;
 import com.fishlog.service.CatchService;
 
-import org.apache.catalina.connector.Response;
+import jakarta.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,13 +33,25 @@ public class CatchController {
         return catchService.getAllCatches();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<FishCatch> getCatch(@PathVariable Long id) {
+        Optional<FishCatch> foundCatch = catchService.getCatch(id);
+
+        if (foundCatch.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(foundCatch.get());
+    }
+
     @PostMapping
-    public FishCatch addCatch(@RequestBody CreateCatchRequest request) {
+    public FishCatch addCatch(@Valid @RequestBody CreateCatchRequest request) {
         return catchService.addCatch(request);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<FishCatch> updateCatch(@PathVariable Long id, @RequestBody CreateCatchRequest request) {
+    public ResponseEntity<FishCatch> updateCatch(@PathVariable Long id,
+            @Valid @RequestBody CreateCatchRequest request) {
 
         Optional<FishCatch> updatedCatch = catchService.updateCatch(id, request);
 
