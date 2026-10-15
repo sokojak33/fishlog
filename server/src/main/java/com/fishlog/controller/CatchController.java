@@ -7,6 +7,7 @@ import com.fishlog.service.CatchService;
 import jakarta.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,5 +61,16 @@ public class CatchController {
         }
 
         return ResponseEntity.ok(updatedCatch.get());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<FishCatch> deleteCatch(@PathVariable Long id) {
+        boolean deleted = catchService.deleteCatch(id);
+
+        if (!deleted) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.noContent().build();
     }
 }

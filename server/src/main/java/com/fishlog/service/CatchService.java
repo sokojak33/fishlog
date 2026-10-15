@@ -49,4 +49,13 @@ public class CatchService {
 
         return Optional.of(updatedCatch);
     }
+
+    public boolean deleteCatch(Long id) {
+        if (!catchRepository.existsById(id)) {
+            return false;
+        }
+
+        catchRepository.deleteById(id);
+        return true;
+    }
 }
