@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
-import type { FishCatch } from "./types/fishCatch";
+import type { FishCatch, NewFishCatch } from "./types/fishCatch";
 import "./CatchHistory.css";
+import EditCatchModal from "./components/EditCatchModal";
 
 function CatchHistory() {
   const [catches, setCatches] = useState<FishCatch[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [editError, setEditError] = useState<string | null>(null);
+  const [catchToEdit, setCatchToEdit] = useState<FishCatch | null>(null);
 
   useEffect(() => {
     fetch("/api/catches")
@@ -29,6 +32,40 @@ function CatchHistory() {
       });
   }, []);
 
+  const editCatch = async (
+    id: number,
+    newCatch: NewFishCatch,
+  ): Promise<boolean> => {
+    setEditError(null);
+
+    try {
+      const response = await fetch(`/api/catches/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newCatch),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to edit catch");
+      }
+
+      const editedCatch: FishCatch = await response.json();
+
+      setCatches((currentCatches) =>
+        currentCatches.map((fishCatch) =>
+          fishCatch.id === editedCatch.id ? editedCatch : fishCatch,
+        ),
+      );
+
+      return true;
+    } catch {
+      setEditError("Unable to edit catch. Please try again.");
+      return false;
+    }
+  };
+
   const deleteCatch = async (id: number): Promise<void> => {
     setDeleteError(null);
 
@@ -47,6 +84,11 @@ function CatchHistory() {
     } catch {
       setDeleteError("Unable to delete catch. Please try again.");
     }
+  };
+
+  const openEditForm = (fishCatch: FishCatch) => {
+    setEditError(null);
+    setCatchToEdit(fishCatch);
   };
 
   if (loading) {
@@ -89,6 +131,16 @@ function CatchHistory() {
           <p>{deleteError}</p>
         </div>
       )}
+
+      {catchToEdit && (
+        <EditCatchModal
+          fishCatch={catchToEdit}
+          onClose={() => setCatchToEdit(null)}
+          onEditCatch={editCatch}
+          editError={editError}
+        />
+      )}
+
       <div className="catch-history-table-wrapper">
         <table className="catch-history-table">
           <thead>
@@ -108,16 +160,26 @@ function CatchHistory() {
                 <td>{fish.location}</td>
                 <td>{fish.date}</td>
                 <td>
-                  <Button
-                    variant="danger"
-                    onClick={() => {
-                      if (window.confirm("Are you sure you want to delete?")) {
-                        deleteCatch(fish.id);
-                      }
-                    }}
-                  >
-                    Delete
-                  </Button>
+                  <div className="catch-history-actions">
+                    <Button
+                      variant="secondary"
+                      onClick={() => openEditForm(fish)}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      variant="danger"
+                      onClick={() => {
+                        if (
+                          window.confirm("Are you sure you want to delete?")
+                        ) {
+                          deleteCatch(fish.id);
+                        }
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </div>
                 </td>
               </tr>
             ))}

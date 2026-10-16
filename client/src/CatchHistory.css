@@ -92,6 +92,11 @@
   margin-bottom: 16px;
 }
 
+.catch-history-actions {
+  display: flex;
+  gap: 8px;
+}
+
 @media (max-width: 640px) {
   .catch-history-page {
     width: min(100% - 32px, 1100px);
