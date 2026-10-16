@@ -86,6 +86,17 @@
   color: #e3a5a5;
 }
 
+.catch-history-delete-error {
+  min-height: 70px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+}
+
+.catch-history-actions {
+  display: flex;
+  gap: 8px;
+}
+
 @media (max-width: 640px) {
   .catch-history-page {
     width: min(100% - 32px, 1100px);

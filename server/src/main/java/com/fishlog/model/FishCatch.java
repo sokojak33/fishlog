@@ -46,4 +46,15 @@ public class FishCatch {
     public double getLength() {
         return length;
     }
+
+    public void update(
+            String species,
+            String location,
+            String date,
+            double length) {
+        this.species = species;
+        this.location = location;
+        this.date = date;
+        this.length = length;
+    }
 }
