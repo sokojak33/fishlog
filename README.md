@@ -15,8 +15,10 @@ The goal of the project is to build a complete fishing log where users can recor
 - Client/server integration using a Vite development proxy
 - Separate public and application navigation layouts
 - Catch History page for viewing all recorded catches
+- Edit existing catches through a pre-populated form
+- Delete catches with confirmation and error handling
 - Persistent catch storage using H2 and Spring Data JPA
-- Backend integration testing for catch creation and retrieval
+- Backend integration tests covering catch CRUD operations, validation, persistence, and error responses
 
 ## Tech Stack
 
@@ -39,4 +41,6 @@ The goal of the project is to build a complete fishing log where users can recor
 
 ## Status
 
-FishLog is actively under development. Catch data is persisted using an H2 database through Spring Data JPA, and the backend currently supports creating, retrieving, updating, and deleting catches.
+FishLog is actively under development. Catch data is persisted using an H2 database through Spring Data JPA, and full catch management is currently supported through the application's REST API and Catch History interface.
+
+The next stage of development will focus on refining the application's domain and feature design before expanding the data model. Future work may include richer catch details, user authentication and catch ownership, additional testing, and deployment.
