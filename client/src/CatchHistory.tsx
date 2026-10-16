@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Button from "react-bootstrap/Button";
 import type { FishCatch } from "./types/fishCatch";
 import "./CatchHistory.css";
 
@@ -6,6 +7,7 @@ function CatchHistory() {
   const [catches, setCatches] = useState<FishCatch[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/api/catches")
@@ -26,6 +28,26 @@ function CatchHistory() {
         setLoading(false);
       });
   }, []);
+
+  const deleteCatch = async (id: number): Promise<void> => {
+    setDeleteError(null);
+
+    try {
+      const response = await fetch(`/api/catches/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete catch");
+      }
+
+      setCatches((currentCatches) =>
+        currentCatches.filter((fishCatch) => fishCatch.id !== id),
+      );
+    } catch {
+      setDeleteError("Unable to delete catch. Please try again.");
+    }
+  };
 
   if (loading) {
     return (
@@ -62,6 +84,11 @@ function CatchHistory() {
     <div className="catch-history-page">
       <h1>Your Catch History</h1>
 
+      {deleteError && (
+        <div className="catch-history-state catch-history-state-error catch-history-delete-error">
+          <p>{deleteError}</p>
+        </div>
+      )}
       <div className="catch-history-table-wrapper">
         <table className="catch-history-table">
           <thead>
@@ -70,6 +97,7 @@ function CatchHistory() {
               <th scope="col">Size</th>
               <th scope="col">Location</th>
               <th scope="col">Catch Date</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -79,6 +107,18 @@ function CatchHistory() {
                 <td>{fish.length}</td>
                 <td>{fish.location}</td>
                 <td>{fish.date}</td>
+                <td>
+                  <Button
+                    variant="danger"
+                    onClick={() => {
+                      if (window.confirm("Are you sure you want to delete?")) {
+                        deleteCatch(fish.id);
+                      }
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </td>
               </tr>
             ))}
           </tbody>
